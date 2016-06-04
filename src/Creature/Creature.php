@@ -9,6 +9,7 @@
 namespace Evo\Creature;
 
 use Evo\Species\ISpecies;
+use Evo\Species\Species;
 
 class Creature implements ICreature
 {
@@ -52,6 +53,9 @@ class Creature implements ICreature
         $this->species = $species;
     }
 
+    /**
+     * @return Species
+     */
     public function getSpecies()
     {
         return $this->species;

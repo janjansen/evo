@@ -21,10 +21,32 @@ abstract class AbstractFeature implements IFeature
     }
 
     /**
+     * @return int
+     */
+    public function getCost()
+    {
+        return 0;
+    }
+
+    /**
      * @param mixed $value
      */
     public function setValue($value)
     {
         $this->value = $value;
+    }
+    
+    public function getName()
+    {
+        return $this->getValue();
+        $class = get_called_class();
+        $class = explode( '\\', $class );
+        $class = end( $class );
+        return $class . '_' . $this->getValue();
+    }
+
+    public function getBattlePower()
+    {
+        return 0;
     }
 }

@@ -39,9 +39,39 @@ class Universe
 
     public function run()
     {
-        for ($i=0; $i < 100; $i++) {
-            echo $i.PHP_EOL;
+        for ($i=0; $i < 10000; $i++) {
             $this->time->tick();
+            $this->dump($i);
         }
+    }
+
+    /**
+     * @param array $creatures
+     */
+    public function setCreatures($creatures)
+    {
+        $this->creatures = $creatures;
+    }
+    
+    private function dump($i)
+    {
+        if (empty($this->getCreatures())) {
+            die();
+        }
+        $stat = [];
+        foreach ($this->getCreatures() as $creature) {
+            $hash = $creature->getSpecies()->getHash();
+            if(!isset($stat[$hash])) {
+                $stat[$hash] = 0;
+            }
+
+            $stat[$hash]++;
+        }
+
+        echo 'STEP     '.$i.PHP_EOL;
+        foreach ($stat as $k=>$v) {
+            echo $k.' '.$v.PHP_EOL;
+        }
+        echo '---------------------'.PHP_EOL;
     }
 }

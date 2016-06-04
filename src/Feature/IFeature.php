@@ -14,4 +14,6 @@ interface IFeature
     public function getValue();
     public function setValue($value);
     public function getPossibleValues();
+    public function getName();
+    public function getBattlePower();
 }

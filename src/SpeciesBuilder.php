@@ -20,7 +20,8 @@ class SpeciesBuilder
     {
         $species = new Species();
         $species->addFeature($this->createFeature('Evo\Feature\Size'));
-        $species->addFeature($this->createFeature('Evo\Feature\WarmBlood'));
+        $species->addFeature($this->createFeature('Evo\Feature\BattleStrategy'));
+//        $species->addFeature($this->createFeature('Evo\Feature\WarmBlood'));
 
         return $species;
     }
@@ -35,7 +36,7 @@ class SpeciesBuilder
         /**
          * @var $feature IFeature
          */
-        $feature->setValue(array_rand($feature->getPossibleValues()));
+        $feature->setValue($feature->getPossibleValues()[array_rand($feature->getPossibleValues())]);
 
         return $feature;
     }

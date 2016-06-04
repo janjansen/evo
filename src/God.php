@@ -18,9 +18,9 @@ class God
         $builder = new SpeciesBuilder();
         for($i = 0; $i < 100; $i++) {
             $species = $builder->createNewSpecies();
-            for ($j = 0; $j < 100; $j++) {
+            for ($j = 0; $j < 10; $j++) {
                 $creature = new Creature();
-                $creature->setEnergy(mt_rand(100,500));
+                $creature->setEnergy(mt_rand($species->getMiniEnergyForLife() * 2 ,$species->getMiniEnergyForLife() * 100));
                 $creature->setSpecies($species);
                 $universe->addCreature($creature);
             }

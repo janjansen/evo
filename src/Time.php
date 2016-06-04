@@ -8,6 +8,8 @@
 
 namespace Evo;
 
+use Evo\Creature\Creature;
+
 class Time
 {
     protected $universe;
@@ -20,10 +22,11 @@ class Time
     public function tick()
     {
         $this->runBattles();
-        
+        $this->kill();
+        $this->reproduct();
     }
 
-    public function runBattles()
+    protected function runBattles()
     {
         $creatures = $this->universe->getCreatures();
         foreach ($creatures as $k => $creature) {
@@ -32,5 +35,33 @@ class Time
                 $battle->run();
             }
         }
+    }
+
+    protected function reproduct()
+    {
+        $newCreatures = [];
+        foreach ($this->universe->getCreatures() as $oldCreature) {
+            $energy = $oldCreature->getEnergy();
+            $oldCreature->decreaseEnergy($energy / 2);
+            $newCreature = new Creature();
+            $newCreature->setSpecies($oldCreature->getSpecies());
+            $newCreature->setEnergy($energy - $oldCreature->getEnergy());
+            $newCreatures[] = $newCreature;
+        }
+
+        $this->universe->setCreatures(array_merge($this->universe->getCreatures(), $newCreatures));
+    }
+
+    protected function kill()
+    {
+        $creatures = [];
+        foreach ($this->universe->getCreatures() as $creature) {
+            $creature->decreaseEnergy($creature->getSpecies()->getMiniEnergyForLife());
+            if ($creature->getSpecies()->getMiniEnergyForLife() < $creature->getEnergy()) {
+                $creatures[] = $creature;
+            }
+        }
+
+        $this->universe->setCreatures($creatures);
     }
 }

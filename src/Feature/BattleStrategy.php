@@ -10,18 +10,23 @@ namespace Evo\Feature;
 
 class BattleStrategy extends AbstractFeature
 {
-    const BASE_COST = 10;
-    const COST_FACTOR = 10;
-
+    const ALWAYS_RUN = 'ALWAYS_RUN';
+    const ALWAYS_FIGHT = 'ALWAYS_FIGHT';
+    
     public function getCost()
     {
-        return $this->value ? self::BASE_COST : self::BASE_COST * self::COST_FACTOR;
+        switch (true) {
+            case $this->getValue() == self::ALWAYS_RUN :
+            case $this->getValue() == self::ALWAYS_FIGHT :
+                return 0;
+        }
     }
 
     public function getPossibleValues()
     {
         return [
-            0,1
+            self::ALWAYS_FIGHT,
+            self::ALWAYS_RUN,
         ];
     }
 }

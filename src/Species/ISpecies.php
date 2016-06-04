@@ -14,5 +14,7 @@ interface ISpecies
 {
     public function addFeature(IFeature $feature);
     public function getFeatures();
+    public function getHash();
+    public function getMiniEnergyForLife();
     
 }
