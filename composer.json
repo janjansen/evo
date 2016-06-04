@@ -1,0 +1,15 @@
+{
+    "name": "root/evo",
+    "authors": [
+        {
+            "name": "Roman Somkin",
+            "email": "somkin.roman@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Evo\\": "src/"
+        }
+    },
+    "require": {}
+}
