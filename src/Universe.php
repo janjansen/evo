@@ -8,14 +8,21 @@
 
 namespace Evo;
 
+use Evo\Creature\Creature;
 use Evo\Creature\ICreature;
 
-class Environment
+class Universe
 {
     protected $creatures = [];
+    protected $time;
+    
+    public function __construct()
+    {
+        $this->time = new Time($this);
+    }
 
     /**
-     * @return mixed
+     * @return Creature[]
      */
     public function getCreatures()
     {
@@ -30,5 +37,11 @@ class Environment
         $this->creatures[] = $creatures;
     }
 
-
+    public function run()
+    {
+        for ($i=0; $i < 100; $i++) {
+            echo $i.PHP_EOL;
+            $this->time->tick();
+        }
+    }
 }
